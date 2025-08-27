@@ -36,8 +36,8 @@ const Dashboard = () => {
       <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${color} mb-4`}>
         <Icon className="w-6 h-6 text-white" />
       </div>
-      <div className="text-2xl font-bold text-white mb-1">{value}</div>
-      <div className="text-white/60 text-sm">{label}</div>
+      <div className="text-2xl font-bold text-gray-900 mb-1">{value}</div>
+      <div className="text-gray-500 text-sm">{label}</div>
     </Card>
   )
 
@@ -45,10 +45,10 @@ const Dashboard = () => {
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-white mb-4">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Welcome to <span className="gradient-text">CodeTracker</span>
         </h1>
-        <p className="text-white/70 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
           AI-powered code evolution tracking and debugging platform that learns from your project's history
         </p>
       </div>
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <Card>
-        <h3 className="text-white text-xl font-semibold mb-6">Quick Actions</h3>
+        <h3 className="text-gray-900 text-xl font-semibold mb-6">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Button
             variant="secondary"
@@ -115,13 +115,13 @@ const Dashboard = () => {
       {/* Recent Activity */}
       {projects.length > 0 && (
         <Card>
-          <h3 className="text-white text-xl font-semibold mb-6">Recent Projects</h3>
+          <h3 className="text-gray-900 text-xl font-semibold mb-6">Recent Projects</h3>
           <div className="space-y-4">
             {projects.slice(0, 3).map((project) => (
-              <div key={project.id} className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
+              <div key={project.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                 <div>
-                  <h4 className="text-white font-medium">{project.name}</h4>
-                  <p className="text-white/60 text-sm">{project.git_url}</p>
+                  <h4 className="text-gray-900 font-medium">{project.name}</h4>
+                  <p className="text-gray-500 text-sm">{project.git_url}</p>
                 </div>
                 <Button
                   variant="ghost"

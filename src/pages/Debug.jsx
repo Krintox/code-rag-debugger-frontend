@@ -21,8 +21,8 @@ const Debug = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Debug Assistant</h1>
-        <p className="text-white/60">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Debug Assistant</h1>
+        <p className="text-gray-600">
           AI-powered debugging using your project's historical data and patterns
         </p>
       </div>
