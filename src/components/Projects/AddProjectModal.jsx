@@ -40,7 +40,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
     >
       <form onSubmit={handleSubmit} className="p-6 space-y-4">
         <div>
-          <label className="block text-white/80 text-sm font-medium mb-2">
+          <label className="block text-gray-700 text-sm font-medium mb-2">
             Project Name *
           </label>
           <input
@@ -49,12 +49,12 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder="e.g., My Awesome Project"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
         <div>
-          <label className="block text-white/80 text-sm font-medium mb-2">
+          <label className="block text-gray-700 text-sm font-medium mb-2">
             Git Repository URL *
           </label>
           <input
@@ -63,12 +63,12 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             value={formData.git_url}
             onChange={(e) => handleInputChange('git_url', e.target.value)}
             placeholder="https://github.com/username/repository.git"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 font-mono text-sm"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
           />
         </div>
 
         <div>
-          <label className="block text-white/80 text-sm font-medium mb-2">
+          <label className="block text-gray-700 text-sm font-medium mb-2">
             Description
           </label>
           <textarea
@@ -76,7 +76,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             onChange={(e) => handleInputChange('description', e.target.value)}
             placeholder="Brief description of the project..."
             rows={3}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
           />
         </div>
 
@@ -92,6 +92,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
           <Button
             type="submit"
             loading={loading}
+            className="btn-primary"
           >
             Add Project
           </Button>

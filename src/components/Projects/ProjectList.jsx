@@ -31,12 +31,12 @@ const ProjectList = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">Your Projects</h2>
-          <p className="text-white/60">Manage and track your code repositories</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Projects</h2>
+          <p className="text-gray-600">Manage and track your code repositories</p>
         </div>
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-2 btn-primary"
         >
           <Plus className="w-4 h-4" />
           <span>Add Project</span>
@@ -46,15 +46,15 @@ const ProjectList = () => {
       {loading ? (
         <Card>
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
           </div>
         </Card>
       ) : projects.length === 0 ? (
         <Card className="text-center py-12">
-          <GitBranch className="w-12 h-12 text-white/40 mx-auto mb-4" />
-          <h3 className="text-white text-lg font-medium mb-2">No projects yet</h3>
-          <p className="text-white/60 mb-4">Add your first project to start tracking code evolution</p>
-          <Button onClick={() => setIsModalOpen(true)}>
+          <GitBranch className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+          <h3 className="text-gray-700 text-lg font-medium mb-2">No projects yet</h3>
+          <p className="text-gray-500 mb-4">Add your first project to start tracking code evolution</p>
+          <Button onClick={() => setIsModalOpen(true)} className="btn-primary">
             Add Your First Project
           </Button>
         </Card>

@@ -31,40 +31,40 @@ const ProjectCard = ({ project, onRefresh }) => {
     <Card hover className="h-full">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-blue-500/20 rounded-lg">
-            <GitBranch className="w-5 h-5 text-blue-400" />
+          <div className="p-2 bg-blue-100 rounded-lg">
+            <GitBranch className="w-5 h-5 text-blue-600" />
           </div>
-          <h3 className="text-white font-semibold text-lg">{project.name}</h3>
+          <h3 className="text-gray-900 font-semibold text-lg">{project.name}</h3>
         </div>
         <Button
           variant="ghost"
           size="sm"
           loading={refreshing}
           onClick={handleRefresh}
-          className="p-2"
+          className="p-2 text-gray-500 hover:text-gray-700"
         >
           <RefreshCw className="w-4 h-4" />
         </Button>
       </div>
 
       {project.description && (
-        <p className="text-white/70 text-sm mb-4 line-clamp-2">
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
           {project.description}
         </p>
       )}
 
       <div className="space-y-2 mb-4">
-        <div className="flex items-center space-x-2 text-white/60 text-sm">
+        <div className="flex items-center space-x-2 text-gray-500 text-sm">
           <FileText className="w-4 h-4" />
           <span className="truncate">{project.git_url}</span>
         </div>
-        <div className="flex items-center space-x-2 text-white/60 text-sm">
+        <div className="flex items-center space-x-2 text-gray-500 text-sm">
           <Calendar className="w-4 h-4" />
           <span>Created {formatDate(project.created_at)}</span>
         </div>
       </div>
 
-      <div className="flex items-center space-x-3 pt-4 border-t border-white/10">
+      <div className="flex items-center space-x-3 pt-4 border-t border-gray-200">
         <Button
           variant="secondary"
           size="sm"
@@ -77,6 +77,7 @@ const ProjectCard = ({ project, onRefresh }) => {
           variant="ghost"
           size="sm"
           onClick={() => window.open(project.git_url, '_blank')}
+          className="text-gray-500 hover:text-gray-700"
         >
           <ExternalLink className="w-4 h-4" />
         </Button>
