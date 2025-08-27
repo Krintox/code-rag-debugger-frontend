@@ -38,15 +38,15 @@ const DebugInterface = ({ projects }) => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <Card>
         <div className="flex items-center space-x-3 mb-6">
-          <div className="p-2 bg-red-500/20 rounded-lg">
-            <Bug className="w-5 h-5 text-red-400" />
+          <div className="p-2 bg-red-100 rounded-lg">
+            <Bug className="w-5 h-5 text-red-600" />
           </div>
-          <h3 className="text-white text-lg font-semibold">Debug Code</h3>
+          <h3 className="text-gray-900 text-lg font-semibold">Debug Code</h3>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2">
               Error Message *
             </label>
             <textarea
@@ -54,51 +54,51 @@ const DebugInterface = ({ projects }) => {
               value={formData.error_message}
               onChange={(e) => handleInputChange('error_message', e.target.value)}
               placeholder="Paste the error message or stack trace here..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[100px]"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none min-h-[100px]"
             />
           </div>
 
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2">
               Code Snippet
             </label>
             <div className="relative">
-              <Code className="absolute left-3 top-3 w-4 h-4 text-white/40" />
+              <Code className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
               <textarea
                 value={formData.code_snippet}
                 onChange={(e) => handleInputChange('code_snippet', e.target.value)}
                 placeholder="Paste the relevant code snippet..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[120px] font-mono text-sm"
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none min-h-[120px] font-mono text-sm"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-white/80 text-sm font-medium mb-2">
+              <label className="block text-gray-700 text-sm font-medium mb-2">
                 File Path
               </label>
               <div className="relative">
-                <FileText className="absolute left-3 top-3 w-4 h-4 text-white/40" />
+                <FileText className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
                   value={formData.file_path}
                   onChange={(e) => handleInputChange('file_path', e.target.value)}
                   placeholder="e.g., src/utils/helper.js"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-white/80 text-sm font-medium mb-2">
+              <label className="block text-gray-700 text-sm font-medium mb-2">
                 Project
               </label>
               <select
                 required
                 value={formData.project_id}
                 onChange={(e) => handleInputChange('project_id', e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="">Select a project</option>
                 {projects.map((project) => (
@@ -111,21 +111,21 @@ const DebugInterface = ({ projects }) => {
           </div>
 
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2">
               Additional Context
             </label>
             <textarea
               value={formData.additional_context}
               onChange={(e) => handleInputChange('additional_context', e.target.value)}
               placeholder="Any additional information about the error..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[80px]"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none min-h-[80px]"
             />
           </div>
 
           <Button
             type="submit"
             loading={loading}
-            className="w-full flex items-center justify-center space-x-2 py-3"
+            className="w-full flex items-center justify-center space-x-2 py-3 btn-primary"
           >
             <Sparkles className="w-4 h-4" />
             <span>Find Solution</span>
@@ -138,9 +138,9 @@ const DebugInterface = ({ projects }) => {
           <SolutionView solution={solution} />
         ) : (
           <Card className="h-full flex items-center justify-center">
-            <div className="text-center text-white/60">
-              <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-40" />
-              <h4 className="text-lg font-medium mb-2">AI-Powered Solutions</h4>
+            <div className="text-center text-gray-500">
+              <Sparkles className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+              <h4 className="text-lg font-medium mb-2 text-gray-700">AI-Powered Solutions</h4>
               <p className="text-sm">Enter error details to get intelligent solutions from your project's history</p>
             </div>
           </Card>

@@ -6,11 +6,12 @@ import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
 import Debug from './pages/Debug'
 import History from './pages/History'
+import './App.css'
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen flex bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <Sidebar />
         <div className="flex-1 flex flex-col lg:ml-64">
           <Header />

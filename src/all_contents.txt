@@ -1,0 +1,1886 @@
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\App.css ---
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\App.js ---
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import Header from './components/Layout/Header'
+import Sidebar from './components/Layout/Sidebar'
+import Dashboard from './pages/Dashboard'
+import Projects from './pages/Projects'
+import Debug from './pages/Debug'
+import History from './pages/History'
+
+function App() {
+  return (
+    <Router>
+      <div className="min-h-screen flex bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <Sidebar />
+        <div className="flex-1 flex flex-col lg:ml-64">
+          <Header />
+          <main className="flex-1 p-6 overflow-auto">
+            <AnimatePresence mode="wait">
+              <Routes>
+                <Route path="/" element={
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Dashboard />
+                  </motion.div>
+                } />
+                <Route path="/projects" element={
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Projects />
+                  </motion.div>
+                } />
+                <Route path="/debug" element={
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Debug />
+                  </motion.div>
+                } />
+                <Route path="/history" element={
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <History />
+                  </motion.div>
+                } />
+              </Routes>
+            </AnimatePresence>
+          </main>
+        </div>
+      </div>
+    </Router>
+  )
+}
+
+export default App
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\App.test.js ---
+
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\index.css ---
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+  
+  .glass-dark {
+    @apply bg-black/10 backdrop-blur-md border border-white/10 shadow-2xl;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+  }
+  
+  .smooth-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white/10 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/30 rounded-full hover:bg-white/40;
+}
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\index.js ---
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\logo.svg ---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3"><g fill="#61DAFB"><path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z"/><circle cx="420.9" cy="296.5" r="45.7"/><path d="M520.5 78.1z"/></g></svg>
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\main.jsx ---
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './styles/index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\output.py ---
+
+import os
+
+def collect_contents(root_folder, output_file):
+    with open(output_file, "w", encoding="utf-8") as outfile:
+        for foldername, subfolders, filenames in os.walk(root_folder):
+            for filename in filenames:
+                # Skip the output file itself if inside root folder
+                if filename == output_file:
+                    continue
+
+                file_path = os.path.join(foldername, filename)
+                try:
+                    with open(file_path, "r", encoding="utf-8") as infile:
+                        outfile.write(f"\n--- File: {file_path} ---\n\n")
+                        outfile.write(infile.read())
+                        outfile.write("\n\n")
+                except Exception as e:
+                    outfile.write(f"\n--- Could not read {file_path}: {e} ---\n\n")
+
+if __name__ == "__main__":
+    root_folder = os.getcwd()  # current directory
+    output_file = "all_contents.txt"
+    collect_contents(root_folder, output_file)
+    print(f"✅ All contents written to {output_file}")
+
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\reportWebVitals.js ---
+
+const reportWebVitals = onPerfEntry => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\setupTests.js ---
+
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom';
+
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Debug\DebugInterface.jsx ---
+
+import { useState } from 'react'
+import { Bug, Code, FileText, Sparkles } from 'lucide-react'
+import Card from '../UI/Card'
+import Button from '../UI/Button'
+import SolutionView from './SolutionView'
+import { debugCode } from '../../utils/api'
+
+const DebugInterface = ({ projects }) => {
+  const [formData, setFormData] = useState({
+    error_message: '',
+    code_snippet: '',
+    file_path: '',
+    additional_context: '',
+    project_id: ''
+  })
+  const [solution, setSolution] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    
+    try {
+      const response = await debugCode(formData)
+      setSolution(response)
+    } catch (error) {
+      console.error('Error debugging:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <Card>
+        <div className="flex items-center space-x-3 mb-6">
+          <div className="p-2 bg-red-500/20 rounded-lg">
+            <Bug className="w-5 h-5 text-red-400" />
+          </div>
+          <h3 className="text-white text-lg font-semibold">Debug Code</h3>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-2">
+              Error Message *
+            </label>
+            <textarea
+              required
+              value={formData.error_message}
+              onChange={(e) => handleInputChange('error_message', e.target.value)}
+              placeholder="Paste the error message or stack trace here..."
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[100px]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-2">
+              Code Snippet
+            </label>
+            <div className="relative">
+              <Code className="absolute left-3 top-3 w-4 h-4 text-white/40" />
+              <textarea
+                value={formData.code_snippet}
+                onChange={(e) => handleInputChange('code_snippet', e.target.value)}
+                placeholder="Paste the relevant code snippet..."
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[120px] font-mono text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                File Path
+              </label>
+              <div className="relative">
+                <FileText className="absolute left-3 top-3 w-4 h-4 text-white/40" />
+                <input
+                  type="text"
+                  value={formData.file_path}
+                  onChange={(e) => handleInputChange('file_path', e.target.value)}
+                  placeholder="e.g., src/utils/helper.js"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                Project
+              </label>
+              <select
+                required
+                value={formData.project_id}
+                onChange={(e) => handleInputChange('project_id', e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+              >
+                <option value="">Select a project</option>
+                {projects.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-2">
+              Additional Context
+            </label>
+            <textarea
+              value={formData.additional_context}
+              onChange={(e) => handleInputChange('additional_context', e.target.value)}
+              placeholder="Any additional information about the error..."
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[80px]"
+            />
+          </div>
+
+          <Button
+            type="submit"
+            loading={loading}
+            className="w-full flex items-center justify-center space-x-2 py-3"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>Find Solution</span>
+          </Button>
+        </form>
+      </Card>
+
+      <div>
+        {solution ? (
+          <SolutionView solution={solution} />
+        ) : (
+          <Card className="h-full flex items-center justify-center">
+            <div className="text-center text-white/60">
+              <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-40" />
+              <h4 className="text-lg font-medium mb-2">AI-Powered Solutions</h4>
+              <p className="text-sm">Enter error details to get intelligent solutions from your project's history</p>
+            </div>
+          </Card>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default DebugInterface
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Debug\SolutionView.jsx ---
+
+import { useState } from 'react'
+import { CheckCircle, XCircle, ThumbsUp, ThumbsDown, Copy, Sparkles } from 'lucide-react'
+import Card from '../UI/Card'
+import Button from '../UI/Button'
+import { submitFeedback } from '../../utils/api'
+
+const SolutionView = ({ solution }) => {
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false)
+  const [isHelpful, setIsHelpful] = useState(null)
+
+  const handleFeedback = async (helpful) => {
+    setIsHelpful(helpful)
+    try {
+      await submitFeedback({
+        debug_query_id: 1, // This would come from the solution response
+        helpful,
+        comments: helpful ? 'Solution was helpful' : 'Solution needs improvement'
+      })
+      setFeedbackSubmitted(true)
+    } catch (error) {
+      console.error('Error submitting feedback:', error)
+    }
+  }
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text)
+  }
+
+  return (
+    <Card className="h-full">
+      <div className="flex items-center space-x-3 mb-6">
+        <div className="p-2 bg-green-500/20 rounded-lg">
+          <Sparkles className="w-5 h-5 text-green-400" />
+        </div>
+        <h3 className="text-white text-lg font-semibold">AI Solution</h3>
+        <div className="flex-1" />
+        <div className="flex items-center space-x-2 px-3 py-1 bg-white/10 rounded-full">
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+          <span className="text-white/70 text-sm">{Math.round(solution.confidence * 100)}% confident</span>
+        </div>
+      </div>
+
+      {/* Solution */}
+      <div className="mb-6">
+        <h4 className="text-white font-medium mb-3">Recommended Fix</h4>
+        <div className="bg-black/30 rounded-xl p-4 mb-4 relative">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute top-2 right-2 p-1"
+            onClick={() => copyToClipboard(solution.solution)}
+          >
+            <Copy className="w-3 h-3" />
+          </Button>
+          <pre className="text-white text-sm whitespace-pre-wrap font-mono">
+            {solution.solution}
+          </pre>
+        </div>
+      </div>
+
+      {/* Context */}
+      {solution.context.similar_errors.length > 0 && (
+        <div className="mb-6">
+          <h4 className="text-white font-medium mb-3">Similar Past Solutions</h4>
+          <div className="space-y-2">
+            {solution.context.similar_errors.slice(0, 2).map((error, index) => (
+              <div key={index} className="bg-white/5 rounded-lg p-3">
+                <p className="text-white/80 text-sm mb-1">{error.content}</p>
+                <div className="flex items-center space-x-2 text-white/60 text-xs">
+                  <span>Similarity: {Math.round(error.similarity * 100)}%</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Code Suggestions */}
+      {solution.context.code_suggestions.length > 0 && (
+        <div className="mb-6">
+          <h4 className="text-white font-medium mb-3">Best Practices</h4>
+          <div className="space-y-2">
+            {solution.context.code_suggestions.map((suggestion, index) => (
+              <div key={index} className="flex items-start space-x-2">
+                <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                <span className="text-white/70 text-sm">{suggestion}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Feedback */}
+      {!feedbackSubmitted ? (
+        <div className="pt-4 border-t border-white/10">
+          <h4 className="text-white font-medium mb-3">Was this solution helpful?</h4>
+          <div className="flex items-center space-x-3">
+            <Button
+              variant={isHelpful === true ? 'primary' : 'secondary'}
+              size="sm"
+              onClick={() => handleFeedback(true)}
+              className="flex items-center space-x-2"
+            >
+              <ThumbsUp className="w-4 h-4" />
+              <span>Yes</span>
+            </Button>
+            <Button
+              variant={isHelpful === false ? 'primary' : 'secondary'}
+              size="sm"
+              onClick={() => handleFeedback(false)}
+              className="flex items-center space-x-2"
+            >
+              <ThumbsDown className="w-4 h-4" />
+              <span>No</span>
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div className="pt-4 border-t border-white/10">
+          <div className="flex items-center space-x-2 text-green-400">
+            <CheckCircle className="w-5 h-5" />
+            <span className="text-sm">Thanks for your feedback!</span>
+          </div>
+        </div>
+      )}
+    </Card>
+  )
+}
+
+export default SolutionView
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\History\CommitHistory.jsx ---
+
+import { useState, useEffect } from 'react'
+import { GitCommit, Calendar, User, FileText, ExternalLink } from 'lucide-react'
+import Card from '../UI/Card'
+import Button from '../UI/Button'
+import { getProjectCommits } from '../../utils/api'
+
+const CommitHistory = ({ projectId }) => {
+  const [commits, setCommits] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (projectId) {
+      fetchCommits()
+    }
+  }, [projectId])
+
+  const fetchCommits = async () => {
+    try {
+      setLoading(true)
+      const data = await getProjectCommits(projectId)
+      setCommits(data)
+    } catch (error) {
+      console.error('Error fetching commits:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  }
+
+  if (loading) {
+    return (
+      <Card>
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+        </div>
+      </Card>
+    )
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h3 className="text-white text-lg font-semibold">Commit History</h3>
+        <span className="text-white/60 text-sm">{commits.length} commits</span>
+      </div>
+
+      {commits.length === 0 ? (
+        <Card>
+          <div className="text-center py-12 text-white/60">
+            <GitCommit className="w-12 h-12 mx-auto mb-4 opacity-40" />
+            <p>No commits found for this project</p>
+          </div>
+        </Card>
+      ) : (
+        <div className="space-y-3">
+          {commits.map((commit) => (
+            <Card key={commit.id} className="p-4">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
+                  <h4 className="text-white font-medium mb-1">{commit.message}</h4>
+                  <div className="flex items-center space-x-4 text-white/60 text-sm">
+                    <div className="flex items-center space-x-1">
+                      <User className="w-3 h-3" />
+                      <span>{commit.author}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-3 h-3" />
+                      <span>{formatDate(commit.timestamp)}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-white/40 text-sm font-mono">
+                    {commit.hash.slice(0, 7)}
+                  </span>
+                </div>
+              </div>
+
+              {commit.files_changed && commit.files_changed.length > 0 && (
+                <div className="pt-3 border-t border-white/10">
+                  <div className="flex items-center space-x-2 text-white/60 text-sm mb-2">
+                    <FileText className="w-4 h-4" />
+                    <span>Files changed:</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {commit.files_changed.slice(0, 3).map((file, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 bg-white/10 rounded-md text-white/70 text-xs font-mono"
+                      >
+                        {file}
+                      </span>
+                    ))}
+                    {commit.files_changed.length > 3 && (
+                      <span className="px-2 py-1 bg-white/10 rounded-md text-white/70 text-xs">
+                        +{commit.files_changed.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default CommitHistory
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\History\Feedback.jsx ---
+
+import { useState, useEffect } from 'react'
+import { ThumbsUp, ThumbsDown, MessageCircle, Calendar } from 'lucide-react'
+import Card from '../UI/Card'
+import { getFeedback } from '../../utils/api'
+
+const Feedback = ({ debugQueryId }) => {
+  const [feedback, setFeedback] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (debugQueryId) {
+      fetchFeedback()
+    }
+  }, [debugQueryId])
+
+  const fetchFeedback = async () => {
+    try {
+      setLoading(true)
+      const data = await getFeedback(debugQueryId)
+      setFeedback(data)
+    } catch (error) {
+      console.error('Error fetching feedback:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  }
+
+  if (loading) {
+    return (
+      <Card>
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+        </div>
+      </Card>
+    )
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h3 className="text-white text-lg font-semibold">User Feedback</h3>
+        <span className="text-white/60 text-sm">{feedback.length} responses</span>
+      </div>
+
+      {feedback.length === 0 ? (
+        <Card>
+          <div className="text-center py-12 text-white/60">
+            <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-40" />
+            <p>No feedback yet for this solution</p>
+          </div>
+        </Card>
+      ) : (
+        <div className="space-y-3">
+          {feedback.map((item) => (
+            <Card key={item.id} className="p-4">
+              <div className="flex items-start space-x-3">
+                <div className={`p-2 rounded-full ${item.helpful ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                  {item.helpful ? (
+                    <ThumbsUp className="w-4 h-4 text-green-400" />
+                  ) : (
+                    <ThumbsDown className="w-4 h-4 text-red-400" />
+                  )}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center space-x-2 text-white/60 text-sm mb-2">
+                    <Calendar className="w-3 h-3" />
+                    <span>{formatDate(item.created_at)}</span>
+                  </div>
+                  {item.comments && (
+                    <p className="text-white/80 text-sm">{item.comments}</p>
+                  )}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default Feedback
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Layout\Footer.jsx ---
+
+import { Code2, Heart, Github, Twitter } from 'lucide-react'
+
+const Footer = () => {
+  return (
+    <footer className="glass-dark mt-12 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex items-center space-x-3">
+            <Code2 className="w-6 h-6 text-purple-400" />
+            <span className="text-white font-semibold">CodeTracker</span>
+            <span className="text-white/40">•</span>
+            <span className="text-white/60 text-sm">AI-Powered Debugging</span>
+          </div>
+          
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-1 text-white/60 text-sm">
+              <span>Made with</span>
+              <Heart className="w-4 h-4 text-red-400 fill-current" />
+              <span>for developers</span>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/40 hover:text-white transition-colors"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/40 hover:text-white transition-colors"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-6 pt-6 border-t border-white/10 text-center">
+          <p className="text-white/40 text-sm">
+            © 2024 CodeTracker. Built with React, FastAPI, and AI magic.
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+export default Footer
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Layout\Header.jsx ---
+
+import { Bell, Search, User, Settings } from 'lucide-react'
+
+const Header = () => {
+  return (
+    <header className="glass-dark sticky top-0 z-50 p-4 border-b border-white/10">
+      <div className="flex items-center justify-between">
+        <div className="flex-1 max-w-2xl">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Search projects, commits, or errors..."
+              className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/20 transition-all"
+            />
+          </div>
+        </div>
+        
+        <div className="flex items-center space-x-4 ml-6">
+          <button className="relative p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+            <Bell className="w-5 h-5" />
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-xs font-bold flex items-center justify-center">
+              3
+            </span>
+          </button>
+          
+          <button className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+            <Settings className="w-5 h-5" />
+          </button>
+          
+          <button className="flex items-center space-x-2 p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full flex items-center justify-center">
+              <User className="w-4 h-4" />
+            </div>
+            <span className="text-sm font-medium">Developer</span>
+          </button>
+        </div>
+      </div>
+    </header>
+  )
+}
+
+export default Header
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Layout\Sidebar.jsx ---
+
+import { NavLink } from 'react-router-dom'
+import { 
+  Home, 
+  GitBranch, 
+  Bug, 
+  History, 
+  Sparkles,
+  Code2
+} from 'lucide-react'
+
+const Sidebar = () => {
+  const navItems = [
+    { path: '/', icon: Home, label: 'Dashboard' },
+    { path: '/projects', icon: GitBranch, label: 'Projects' },
+    { path: '/debug', icon: Bug, label: 'Debug' },
+    { path: '/history', icon: History, label: 'History' },
+  ]
+
+  return (
+    <aside className="glass-dark fixed top-0 left-0 h-full w-64 border-r border-white/10 hidden lg:block z-50">
+      <div className="p-6 border-b border-white/10">
+        <div className="flex items-center space-x-3">
+          <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
+            <Code2 className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h1 className="text-white font-bold text-xl">CodeTracker</h1>
+            <p className="text-white/60 text-sm">AI-Powered Debugging</p>
+          </div>
+        </div>
+      </div>
+      
+      <nav className="p-4 space-y-2">
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+              `flex items-center space-x-3 p-3 rounded-xl transition-all ${
+                isActive
+                  ? 'bg-white/10 text-white shadow-lg'
+                  : 'text-white/60 hover:text-white hover:bg-white/5'
+              }`
+            }
+          >
+            <item.icon className="w-5 h-5" />
+            <span className="font-medium">{item.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+      
+      <div className="absolute bottom-6 left-6 right-6">
+        <div className="glass p-4 rounded-xl">
+          <div className="flex items-center space-x-2 mb-2">
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            <span className="text-white text-sm font-medium">Pro Tip</span>
+          </div>
+          <p className="text-white/70 text-xs">
+            Use the debugger to find solutions from your project's history
+          </p>
+        </div>
+      </div>
+    </aside>
+  )
+}
+
+export default Sidebar
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Projects\AddProjectModal.jsx ---
+
+import { useState } from 'react'
+import Modal from '../UI/Modal'
+import Button from '../UI/Button'
+import { createProject } from '../../utils/api'
+
+const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    git_url: '',
+    description: ''
+  })
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    
+    try {
+      await createProject(formData)
+      onProjectAdded?.()
+      onClose()
+      setFormData({ name: '', git_url: '', description: '' })
+    } catch (error) {
+      console.error('Error creating project:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Add New Project"
+      size="md"
+    >
+      <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <div>
+          <label className="block text-white/80 text-sm font-medium mb-2">
+            Project Name *
+          </label>
+          <input
+            type="text"
+            required
+            value={formData.name}
+            onChange={(e) => handleInputChange('name', e.target.value)}
+            placeholder="e.g., My Awesome Project"
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+          />
+        </div>
+
+        <div>
+          <label className="block text-white/80 text-sm font-medium mb-2">
+            Git Repository URL *
+          </label>
+          <input
+            type="url"
+            required
+            value={formData.git_url}
+            onChange={(e) => handleInputChange('git_url', e.target.value)}
+            placeholder="https://github.com/username/repository.git"
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 font-mono text-sm"
+          />
+        </div>
+
+        <div>
+          <label className="block text-white/80 text-sm font-medium mb-2">
+            Description
+          </label>
+          <textarea
+            value={formData.description}
+            onChange={(e) => handleInputChange('description', e.target.value)}
+            placeholder="Brief description of the project..."
+            rows={3}
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none"
+          />
+        </div>
+
+        <div className="flex items-center justify-end space-x-3 pt-4">
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={onClose}
+            disabled={loading}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            loading={loading}
+          >
+            Add Project
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  )
+}
+
+export default AddProjectModal
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Projects\ProjectCard.jsx ---
+
+import { useState } from 'react'
+import { GitBranch, RefreshCw, Calendar, FileText, ExternalLink } from 'lucide-react'
+import Card from '../UI/Card'
+import Button from '../UI/Button'
+import { refreshProject } from '../../utils/api'
+
+const ProjectCard = ({ project, onRefresh }) => {
+  const [refreshing, setRefreshing] = useState(false)
+
+  const handleRefresh = async () => {
+    setRefreshing(true)
+    try {
+      await refreshProject(project.id)
+      onRefresh?.()
+    } catch (error) {
+      console.error('Error refreshing project:', error)
+    } finally {
+      setRefreshing(false)
+    }
+  }
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  }
+
+  return (
+    <Card hover className="h-full">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center space-x-3">
+          <div className="p-2 bg-blue-500/20 rounded-lg">
+            <GitBranch className="w-5 h-5 text-blue-400" />
+          </div>
+          <h3 className="text-white font-semibold text-lg">{project.name}</h3>
+        </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          loading={refreshing}
+          onClick={handleRefresh}
+          className="p-2"
+        >
+          <RefreshCw className="w-4 h-4" />
+        </Button>
+      </div>
+
+      {project.description && (
+        <p className="text-white/70 text-sm mb-4 line-clamp-2">
+          {project.description}
+        </p>
+      )}
+
+      <div className="space-y-2 mb-4">
+        <div className="flex items-center space-x-2 text-white/60 text-sm">
+          <FileText className="w-4 h-4" />
+          <span className="truncate">{project.git_url}</span>
+        </div>
+        <div className="flex items-center space-x-2 text-white/60 text-sm">
+          <Calendar className="w-4 h-4" />
+          <span>Created {formatDate(project.created_at)}</span>
+        </div>
+      </div>
+
+      <div className="flex items-center space-x-3 pt-4 border-t border-white/10">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex-1"
+          onClick={() => window.location.href = `/projects#${project.id}`}
+        >
+          View Details
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => window.open(project.git_url, '_blank')}
+        >
+          <ExternalLink className="w-4 h-4" />
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
+export default ProjectCard
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\Projects\ProjectList.jsx ---
+
+import { useState, useEffect } from 'react'
+import { GitBranch, RefreshCw, Plus } from 'lucide-react'
+import Card from '../UI/Card'
+import Button from '../UI/Button'
+import ProjectCard from './ProjectCard'
+import AddProjectModal from './AddProjectModal'
+import { getProjects } from '../../utils/api'
+
+const ProjectList = () => {
+  const [projects, setProjects] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
+
+  const fetchProjects = async () => {
+    try {
+      setLoading(true)
+      const data = await getProjects()
+      setProjects(data)
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-2">Your Projects</h2>
+          <p className="text-white/60">Manage and track your code repositories</p>
+        </div>
+        <Button
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center space-x-2"
+        >
+          <Plus className="w-4 h-4" />
+          <span>Add Project</span>
+        </Button>
+      </div>
+
+      {loading ? (
+        <Card>
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+          </div>
+        </Card>
+      ) : projects.length === 0 ? (
+        <Card className="text-center py-12">
+          <GitBranch className="w-12 h-12 text-white/40 mx-auto mb-4" />
+          <h3 className="text-white text-lg font-medium mb-2">No projects yet</h3>
+          <p className="text-white/60 mb-4">Add your first project to start tracking code evolution</p>
+          <Button onClick={() => setIsModalOpen(true)}>
+            Add Your First Project
+          </Button>
+        </Card>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onRefresh={fetchProjects}
+            />
+          ))}
+        </div>
+      )}
+
+      <AddProjectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onProjectAdded={fetchProjects}
+      />
+    </div>
+  )
+}
+
+export default ProjectList
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\UI\Button.jsx ---
+
+import { motion } from 'framer-motion'
+
+const Button = ({ 
+  children, 
+  variant = 'primary', 
+  size = 'md', 
+  className = '', 
+  loading = false,
+  ...props 
+}) => {
+  const baseClasses = 'rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed'
+  
+  const variants = {
+    primary: 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 focus:ring-blue-500 shadow-lg hover:shadow-xl',
+    secondary: 'bg-white/10 text-white border border-white/20 hover:bg-white/20 focus:ring-white/30',
+    ghost: 'text-white/80 hover:text-white hover:bg-white/10 focus:ring-white/20',
+  }
+  
+  const sizes = {
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2 text-sm',
+    lg: 'px-6 py-3 text-base',
+  }
+  
+  return (
+    <motion.button
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
+      disabled={loading}
+      {...props}
+    >
+      {loading ? (
+        <div className="flex items-center space-x-2">
+          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <span>Loading...</span>
+        </div>
+      ) : (
+        children
+      )}
+    </motion.button>
+  )
+}
+
+export default Button
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\UI\Card.jsx ---
+
+import { motion } from 'framer-motion'
+
+const Card = ({ children, className = '', hover = false, ...props }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className={`glass rounded-2xl p-6 ${hover ? 'card-hover' : ''} ${className}`}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+export default Card
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\UI\Loader.jsx ---
+
+const Loader = ({ size = 'md', className = '' }) => {
+  const sizeClasses = {
+    sm: 'w-4 h-4',
+    md: 'w-6 h-6',
+    lg: 'w-8 h-8',
+    xl: 'w-12 h-12'
+  }
+
+  return (
+    <div className={`animate-spin rounded-full border-2 border-current border-t-transparent ${sizeClasses[size]} ${className}`} />
+  )
+}
+
+export default Loader
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\components\UI\Modal.jsx ---
+
+import { motion, AnimatePresence } from 'framer-motion'
+import { X } from 'lucide-react'
+
+const Modal = ({ isOpen, onClose, title, children, size = 'md' }) => {
+  const sizeClasses = {
+    sm: 'max-w-md',
+    md: 'max-w-2xl',
+    lg: 'max-w-4xl',
+    xl: 'max-w-6xl'
+  }
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          
+          {/* Modal */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className={`relative glass rounded-2xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden`}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <h2 className="text-xl font-semibold text-white">{title}</h2>
+              <button
+                onClick={onClose}
+                className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-xl transition-all"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            {/* Content */}
+            <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
+              {children}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+export default Modal
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\hooks\useApi.js ---
+
+import { useState, useCallback } from 'react'
+
+const useApi = () => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [data, setData] = useState(null)
+
+  const callApi = useCallback(async (apiCall, ...args) => {
+    setLoading(true)
+    setError(null)
+    
+    try {
+      const response = await apiCall(...args)
+      setData(response)
+      return response
+    } catch (err) {
+      setError(err.message)
+      throw err
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  const reset = useCallback(() => {
+    setLoading(false)
+    setError(null)
+    setData(null)
+  }, [])
+
+  return {
+    loading,
+    error,
+    data,
+    callApi,
+    reset
+  }
+}
+
+export default useApi
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\hooks\useLocalStorage.js ---
+
+import { useState, useEffect } from 'react'
+
+const useLocalStorage = (key, initialValue) => {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : initialValue
+    } catch (error) {
+      console.error(`Error reading localStorage key "${key}":`, error)
+      return initialValue
+    }
+  })
+
+  const setValue = (value) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value
+      setStoredValue(valueToStore)
+      window.localStorage.setItem(key, JSON.stringify(valueToStore))
+    } catch (error) {
+      console.error(`Error setting localStorage key "${key}":`, error)
+    }
+  }
+
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === key && e.newValue !== JSON.stringify(storedValue)) {
+        setStoredValue(JSON.parse(e.newValue))
+      }
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+    return () => window.removeEventListener('storage', handleStorageChange)
+  }, [key, storedValue])
+
+  return [storedValue, setValue]
+}
+
+export default useLocalStorage
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\pages\Dashboard.jsx ---
+
+import { useState, useEffect } from 'react'
+import { Code2, GitBranch, Bug, History, Sparkles } from 'lucide-react'
+import Card from '../components/UI/Card'
+import Button from '../components/UI/Button'
+import { getProjects } from '../utils/api'
+
+const Dashboard = () => {
+  const [projects, setProjects] = useState([])
+  const [stats, setStats] = useState({
+    totalProjects: 0,
+    totalCommits: 0,
+    solvedErrors: 0,
+    activeProjects: 0
+  })
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
+
+  const fetchProjects = async () => {
+    try {
+      const data = await getProjects()
+      setProjects(data)
+      setStats(prev => ({
+        ...prev,
+        totalProjects: data.length,
+        activeProjects: data.filter(p => p.updated_at).length
+      }))
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+    }
+  }
+
+  const StatCard = ({ icon: Icon, label, value, color }) => (
+    <Card hover className="text-center p-6">
+      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${color} mb-4`}>
+        <Icon className="w-6 h-6 text-white" />
+      </div>
+      <div className="text-2xl font-bold text-white mb-1">{value}</div>
+      <div className="text-white/60 text-sm">{label}</div>
+    </Card>
+  )
+
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Welcome to <span className="gradient-text">CodeTracker</span>
+        </h1>
+        <p className="text-white/70 text-lg max-w-2xl mx-auto">
+          AI-powered code evolution tracking and debugging platform that learns from your project's history
+        </p>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatCard
+          icon={GitBranch}
+          label="Total Projects"
+          value={stats.totalProjects}
+          color="bg-blue-500"
+        />
+        <StatCard
+          icon={Code2}
+          label="Total Commits"
+          value={stats.totalCommits}
+          color="bg-purple-500"
+        />
+        <StatCard
+          icon={Bug}
+          label="Solved Errors"
+          value={stats.solvedErrors}
+          color="bg-green-500"
+        />
+        <StatCard
+          icon={Sparkles}
+          label="Active Projects"
+          value={stats.activeProjects}
+          color="bg-pink-500"
+        />
+      </div>
+
+      {/* Quick Actions */}
+      <Card>
+        <h3 className="text-white text-xl font-semibold mb-6">Quick Actions</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Button
+            variant="secondary"
+            className="flex items-center justify-center space-x-2 py-4"
+            onClick={() => window.location.href = '/projects'}
+          >
+            <GitBranch className="w-5 h-5" />
+            <span>View Projects</span>
+          </Button>
+          <Button
+            variant="secondary"
+            className="flex items-center justify-center space-x-2 py-4"
+            onClick={() => window.location.href = '/debug'}
+          >
+            <Bug className="w-5 h-5" />
+            <span>Debug Code</span>
+          </Button>
+          <Button
+            variant="secondary"
+            className="flex items-center justify-center space-x-2 py-4"
+            onClick={() => window.location.href = '/history'}
+          >
+            <History className="w-5 h-5" />
+            <span>View History</span>
+          </Button>
+        </div>
+      </Card>
+
+      {/* Recent Activity */}
+      {projects.length > 0 && (
+        <Card>
+          <h3 className="text-white text-xl font-semibold mb-6">Recent Projects</h3>
+          <div className="space-y-4">
+            {projects.slice(0, 3).map((project) => (
+              <div key={project.id} className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
+                <div>
+                  <h4 className="text-white font-medium">{project.name}</h4>
+                  <p className="text-white/60 text-sm">{project.git_url}</p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => window.location.href = `/projects#${project.id}`}
+                >
+                  View
+                </Button>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+    </div>
+  )
+}
+
+export default Dashboard
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\pages\Debug.jsx ---
+
+import { useState, useEffect } from 'react'
+import DebugInterface from '../components/Debug/DebugInterface'
+import { getProjects } from '../utils/api'
+
+const Debug = () => {
+  const [projects, setProjects] = useState([])
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
+
+  const fetchProjects = async () => {
+    try {
+      const data = await getProjects()
+      setProjects(data)
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+    }
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white mb-2">Debug Assistant</h1>
+        <p className="text-white/60">
+          AI-powered debugging using your project's historical data and patterns
+        </p>
+      </div>
+      <DebugInterface projects={projects} />
+    </div>
+  )
+}
+
+export default Debug
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\pages\History.jsx ---
+
+import { useState, useEffect } from 'react'
+import { Hammer, GitBranch, MessageCircle } from 'lucide-react'
+import Card from '../components/UI/Card'
+import CommitHistory from '../components/History/CommitHistory'
+import Feedback from '../components/History/Feedback'
+import { getProjects } from '../utils/api'
+
+const History = () => {
+  const [projects, setProjects] = useState([])
+  const [selectedProject, setSelectedProject] = useState(null)
+  const [activeTab, setActiveTab] = useState('commits')
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
+
+  const fetchProjects = async () => {
+    try {
+      const data = await getProjects()
+      setProjects(data)
+      if (data.length > 0) {
+        setSelectedProject(data[0].id)
+      }
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+    }
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white mb-2">History</h1>
+        <p className="text-white/60">
+          Explore your project's commit history and user feedback
+        </p>
+      </div>
+
+      {/* Project Selector */}
+      {projects.length > 0 && (
+        <Card className="mb-6">
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 text-white/60">
+              <GitBranch className="w-4 h-4" />
+              <span>Project:</span>
+            </div>
+            <select
+              value={selectedProject || ''}
+              onChange={(e) => setSelectedProject(Number(e.target.value))}
+              className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+            >
+              {projects.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </Card>
+      )}
+
+      {/* Tabs */}
+      <div className="flex space-x-1 p-1 bg-white/10 rounded-xl mb-6">
+        <button
+          onClick={() => setActiveTab('commits')}
+          className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all ${
+            activeTab === 'commits'
+              ? 'bg-white/20 text-white'
+              : 'text-white/60 hover:text-white'
+          }`}
+        >
+          <Hammer className="w-4 h-4" />
+          <span>Commit History</span>
+        </button>
+        <button
+          onClick={() => setActiveTab('feedback')}
+          className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all ${
+            activeTab === 'feedback'
+              ? 'bg-white/20 text-white'
+              : 'text-white/60 hover:text-white'
+          }`}
+        >
+          <MessageCircle className="w-4 h-4" />
+          <span>Feedback</span>
+        </button>
+      </div>
+
+      {/* Content */}
+      {selectedProject ? (
+        <>
+          {activeTab === 'commits' && (
+            <CommitHistory projectId={selectedProject} />
+          )}
+          {activeTab === 'feedback' && (
+            <Feedback debugQueryId={1} />
+          )}
+        </>
+      ) : (
+        <Card>
+          <div className="text-center py-12 text-white/60">
+            <GitBranch className="w-12 h-12 mx-auto mb-4 opacity-40" />
+            <p>Select a project to view history</p>
+          </div>
+        </Card>
+      )}
+    </div>
+  )
+}
+
+export default History
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\pages\Projects.jsx ---
+
+import { useEffect, useState } from 'react'
+import ProjectList from '../components/Projects/ProjectList'
+
+const Projects = () => {
+  return (
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white mb-2">Projects</h1>
+        <p className="text-white/60">
+          Manage your code repositories and track their evolution over time
+        </p>
+      </div>
+      <ProjectList />
+    </div>
+  )
+}
+
+export default Projects
+
+
+--- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\utils\api.js ---
+
+const API_BASE_URL = 'http://localhost:8000'
+
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.detail || 'An error occurred')
+  }
+  return response.json()
+}
+
+export const api = {
+  // Projects
+  getProjects: () => fetch(`${API_BASE_URL}/projects`).then(handleResponse),
+  getProject: (id) => fetch(`${API_BASE_URL}/projects/${id}`).then(handleResponse),
+  createProject: (data) => 
+    fetch(`${API_BASE_URL}/projects`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(handleResponse),
+  refreshProject: (id) => 
+    fetch(`${API_BASE_URL}/projects/${id}/refresh`, {
+      method: 'POST'
+    }).then(handleResponse),
+  getProjectCommits: (id) => 
+    fetch(`${API_BASE_URL}/projects/${id}/commits`).then(handleResponse),
+
+  // Debug
+  debugCode: (data) =>
+    fetch(`${API_BASE_URL}/debug`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(handleResponse),
+  ragQuery: (data) =>
+    fetch(`${API_BASE_URL}/debug/rag`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(handleResponse),
+
+  // History
+  getCommit: (hash, projectId) =>
+    fetch(`${API_BASE_URL}/history/commits/${hash}?project_id=${projectId}`).then(handleResponse),
+  submitFeedback: (data) =>
+    fetch(`${API_BASE_URL}/history/feedback`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(handleResponse),
+  getFeedback: (debugQueryId) =>
+    fetch(`${API_BASE_URL}/history/feedback/${debugQueryId}`).then(handleResponse),
+}
+
+// Export individual functions for easier imports
+export const {
+  getProjects,
+  getProject,
+  createProject,
+  refreshProject,
+  getProjectCommits,
+  debugCode,
+  ragQuery,
+  getCommit,
+  submitFeedback,
+  getFeedback,
+} = api
+
