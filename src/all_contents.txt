@@ -17,18 +17,18 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #1a1a1a;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #0070f3;
 }
 
 @keyframes App-logo-spin {
@@ -40,6 +40,24 @@
   }
 }
 
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
 
 
 --- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\App.js ---
@@ -52,11 +70,12 @@ import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
 import Debug from './pages/Debug'
 import History from './pages/History'
+import './App.css'
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen flex bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <Sidebar />
         <div className="flex-1 flex flex-col lg:ml-64">
           <Header />
@@ -134,6 +153,8 @@ test('renders learn react link', () => {
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -145,34 +166,43 @@ test('renders learn react link', () => {
   
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     min-height: 100vh;
+    color: #1a1a1a;
   }
 }
 
 @layer components {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg rounded-2xl;
   }
   
   .glass-dark {
-    @apply bg-black/10 backdrop-blur-md border border-white/10 shadow-2xl;
+    @apply bg-gray-900/5 backdrop-blur-md border border-gray-200 shadow-lg;
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
   }
   
   .gradient-bg {
-    @apply bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500;
+    @apply bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500;
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
   }
   
   .smooth-transition {
     @apply transition-all duration-300 ease-in-out;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 transition-all duration-200;
   }
 }
 
@@ -182,11 +212,30 @@ test('renders learn react link', () => {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-white/10 rounded-full;
+  @apply bg-gray-100 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/30 rounded-full hover:bg-white/40;
+  @apply bg-gray-300 rounded-full hover:bg-gray-400;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 
@@ -209,7 +258,6 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
 
 
 --- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\logo.svg ---
@@ -330,15 +378,15 @@ const DebugInterface = ({ projects }) => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <Card>
         <div className="flex items-center space-x-3 mb-6">
-          <div className="p-2 bg-red-500/20 rounded-lg">
-            <Bug className="w-5 h-5 text-red-400" />
+          <div className="p-2 bg-red-100 rounded-lg">
+            <Bug className="w-5 h-5 text-red-600" />
           </div>
-          <h3 className="text-white text-lg font-semibold">Debug Code</h3>
+          <h3 className="text-gray-900 text-lg font-semibold">Debug Code</h3>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2">
               Error Message *
             </label>
             <textarea
@@ -346,51 +394,51 @@ const DebugInterface = ({ projects }) => {
               value={formData.error_message}
               onChange={(e) => handleInputChange('error_message', e.target.value)}
               placeholder="Paste the error message or stack trace here..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[100px]"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none min-h-[100px]"
             />
           </div>
 
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2">
               Code Snippet
             </label>
             <div className="relative">
-              <Code className="absolute left-3 top-3 w-4 h-4 text-white/40" />
+              <Code className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
               <textarea
                 value={formData.code_snippet}
                 onChange={(e) => handleInputChange('code_snippet', e.target.value)}
                 placeholder="Paste the relevant code snippet..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[120px] font-mono text-sm"
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none min-h-[120px] font-mono text-sm"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-white/80 text-sm font-medium mb-2">
+              <label className="block text-gray-700 text-sm font-medium mb-2">
                 File Path
               </label>
               <div className="relative">
-                <FileText className="absolute left-3 top-3 w-4 h-4 text-white/40" />
+                <FileText className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
                   value={formData.file_path}
                   onChange={(e) => handleInputChange('file_path', e.target.value)}
                   placeholder="e.g., src/utils/helper.js"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-white/80 text-sm font-medium mb-2">
+              <label className="block text-gray-700 text-sm font-medium mb-2">
                 Project
               </label>
               <select
                 required
                 value={formData.project_id}
                 onChange={(e) => handleInputChange('project_id', e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="">Select a project</option>
                 {projects.map((project) => (
@@ -403,21 +451,21 @@ const DebugInterface = ({ projects }) => {
           </div>
 
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2">
               Additional Context
             </label>
             <textarea
               value={formData.additional_context}
               onChange={(e) => handleInputChange('additional_context', e.target.value)}
               placeholder="Any additional information about the error..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none min-h-[80px]"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none min-h-[80px]"
             />
           </div>
 
           <Button
             type="submit"
             loading={loading}
-            className="w-full flex items-center justify-center space-x-2 py-3"
+            className="w-full flex items-center justify-center space-x-2 py-3 btn-primary"
           >
             <Sparkles className="w-4 h-4" />
             <span>Find Solution</span>
@@ -430,9 +478,9 @@ const DebugInterface = ({ projects }) => {
           <SolutionView solution={solution} />
         ) : (
           <Card className="h-full flex items-center justify-center">
-            <div className="text-center text-white/60">
-              <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-40" />
-              <h4 className="text-lg font-medium mb-2">AI-Powered Solutions</h4>
+            <div className="text-center text-gray-500">
+              <Sparkles className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+              <h4 className="text-lg font-medium mb-2 text-gray-700">AI-Powered Solutions</h4>
               <p className="text-sm">Enter error details to get intelligent solutions from your project's history</p>
             </div>
           </Card>
@@ -478,30 +526,30 @@ const SolutionView = ({ solution }) => {
   return (
     <Card className="h-full">
       <div className="flex items-center space-x-3 mb-6">
-        <div className="p-2 bg-green-500/20 rounded-lg">
-          <Sparkles className="w-5 h-5 text-green-400" />
+        <div className="p-2 bg-green-100 rounded-lg">
+          <Sparkles className="w-5 h-5 text-green-600" />
         </div>
-        <h3 className="text-white text-lg font-semibold">AI Solution</h3>
+        <h3 className="text-gray-900 text-lg font-semibold">AI Solution</h3>
         <div className="flex-1" />
-        <div className="flex items-center space-x-2 px-3 py-1 bg-white/10 rounded-full">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-          <span className="text-white/70 text-sm">{Math.round(solution.confidence * 100)}% confident</span>
+        <div className="flex items-center space-x-2 px-3 py-1 bg-green-100 rounded-full">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          <span className="text-green-700 text-sm">{Math.round(solution.confidence * 100)}% confident</span>
         </div>
       </div>
 
       {/* Solution */}
       <div className="mb-6">
-        <h4 className="text-white font-medium mb-3">Recommended Fix</h4>
-        <div className="bg-black/30 rounded-xl p-4 mb-4 relative">
+        <h4 className="text-gray-900 font-medium mb-3">Recommended Fix</h4>
+        <div className="bg-gray-50 rounded-xl p-4 mb-4 relative border border-gray-200">
           <Button
             variant="ghost"
             size="sm"
             className="absolute top-2 right-2 p-1"
             onClick={() => copyToClipboard(solution.solution)}
           >
-            <Copy className="w-3 h-3" />
+            <Copy className="w-3 h-3 text-gray-500" />
           </Button>
-          <pre className="text-white text-sm whitespace-pre-wrap font-mono">
+          <pre className="text-gray-900 text-sm whitespace-pre-wrap font-mono">
             {solution.solution}
           </pre>
         </div>
@@ -510,12 +558,12 @@ const SolutionView = ({ solution }) => {
       {/* Context */}
       {solution.context.similar_errors.length > 0 && (
         <div className="mb-6">
-          <h4 className="text-white font-medium mb-3">Similar Past Solutions</h4>
+          <h4 className="text-gray-900 font-medium mb-3">Similar Past Solutions</h4>
           <div className="space-y-2">
             {solution.context.similar_errors.slice(0, 2).map((error, index) => (
-              <div key={index} className="bg-white/5 rounded-lg p-3">
-                <p className="text-white/80 text-sm mb-1">{error.content}</p>
-                <div className="flex items-center space-x-2 text-white/60 text-xs">
+              <div key={index} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <p className="text-gray-700 text-sm mb-1">{error.content}</p>
+                <div className="flex items-center space-x-2 text-gray-500 text-xs">
                   <span>Similarity: {Math.round(error.similarity * 100)}%</span>
                 </div>
               </div>
@@ -527,12 +575,12 @@ const SolutionView = ({ solution }) => {
       {/* Code Suggestions */}
       {solution.context.code_suggestions.length > 0 && (
         <div className="mb-6">
-          <h4 className="text-white font-medium mb-3">Best Practices</h4>
+          <h4 className="text-gray-900 font-medium mb-3">Best Practices</h4>
           <div className="space-y-2">
             {solution.context.code_suggestions.map((suggestion, index) => (
               <div key={index} className="flex items-start space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <span className="text-white/70 text-sm">{suggestion}</span>
+                <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                <span className="text-gray-700 text-sm">{suggestion}</span>
               </div>
             ))}
           </div>
@@ -541,8 +589,8 @@ const SolutionView = ({ solution }) => {
 
       {/* Feedback */}
       {!feedbackSubmitted ? (
-        <div className="pt-4 border-t border-white/10">
-          <h4 className="text-white font-medium mb-3">Was this solution helpful?</h4>
+        <div className="pt-4 border-t border-gray-200">
+          <h4 className="text-gray-900 font-medium mb-3">Was this solution helpful?</h4>
           <div className="flex items-center space-x-3">
             <Button
               variant={isHelpful === true ? 'primary' : 'secondary'}
@@ -565,8 +613,8 @@ const SolutionView = ({ solution }) => {
           </div>
         </div>
       ) : (
-        <div className="pt-4 border-t border-white/10">
-          <div className="flex items-center space-x-2 text-green-400">
+        <div className="pt-4 border-t border-gray-200">
+          <div className="flex items-center space-x-2 text-green-600">
             <CheckCircle className="w-5 h-5" />
             <span className="text-sm">Thanks for your feedback!</span>
           </div>
@@ -623,7 +671,7 @@ const CommitHistory = ({ projectId }) => {
     return (
       <Card>
         <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
         </div>
       </Card>
     )
@@ -632,14 +680,14 @@ const CommitHistory = ({ projectId }) => {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-white text-lg font-semibold">Commit History</h3>
-        <span className="text-white/60 text-sm">{commits.length} commits</span>
+        <h3 className="text-gray-900 text-lg font-semibold">Commit History</h3>
+        <span className="text-gray-500 text-sm">{commits.length} commits</span>
       </div>
 
       {commits.length === 0 ? (
         <Card>
-          <div className="text-center py-12 text-white/60">
-            <GitCommit className="w-12 h-12 mx-auto mb-4 opacity-40" />
+          <div className="text-center py-12 text-gray-500">
+            <GitCommit className="w-12 h-12 mx-auto mb-4 text-gray-300" />
             <p>No commits found for this project</p>
           </div>
         </Card>
@@ -649,8 +697,8 @@ const CommitHistory = ({ projectId }) => {
             <Card key={commit.id} className="p-4">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h4 className="text-white font-medium mb-1">{commit.message}</h4>
-                  <div className="flex items-center space-x-4 text-white/60 text-sm">
+                  <h4 className="text-gray-900 font-medium mb-1">{commit.message}</h4>
+                  <div className="flex items-center space-x-4 text-gray-500 text-sm">
                     <div className="flex items-center space-x-1">
                       <User className="w-3 h-3" />
                       <span>{commit.author}</span>
@@ -662,15 +710,15 @@ const CommitHistory = ({ projectId }) => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-white/40 text-sm font-mono">
+                  <span className="text-gray-400 text-sm font-mono">
                     {commit.hash.slice(0, 7)}
                   </span>
                 </div>
               </div>
 
               {commit.files_changed && commit.files_changed.length > 0 && (
-                <div className="pt-3 border-t border-white/10">
-                  <div className="flex items-center space-x-2 text-white/60 text-sm mb-2">
+                <div className="pt-3 border-t border-gray-200">
+                  <div className="flex items-center space-x-2 text-gray-500 text-sm mb-2">
                     <FileText className="w-4 h-4" />
                     <span>Files changed:</span>
                   </div>
@@ -678,13 +726,13 @@ const CommitHistory = ({ projectId }) => {
                     {commit.files_changed.slice(0, 3).map((file, index) => (
                       <span
                         key={index}
-                        className="px-2 py-1 bg-white/10 rounded-md text-white/70 text-xs font-mono"
+                        className="px-2 py-1 bg-gray-100 rounded-md text-gray-700 text-xs font-mono"
                       >
                         {file}
                       </span>
                     ))}
                     {commit.files_changed.length > 3 && (
-                      <span className="px-2 py-1 bg-white/10 rounded-md text-white/70 text-xs">
+                      <span className="px-2 py-1 bg-gray-100 rounded-md text-gray-700 text-xs">
                         +{commit.files_changed.length - 3} more
                       </span>
                     )}
@@ -745,7 +793,7 @@ const Feedback = ({ debugQueryId }) => {
     return (
       <Card>
         <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
         </div>
       </Card>
     )
@@ -754,14 +802,14 @@ const Feedback = ({ debugQueryId }) => {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-white text-lg font-semibold">User Feedback</h3>
-        <span className="text-white/60 text-sm">{feedback.length} responses</span>
+        <h3 className="text-gray-900 text-lg font-semibold">User Feedback</h3>
+        <span className="text-gray-500 text-sm">{feedback.length} responses</span>
       </div>
 
       {feedback.length === 0 ? (
         <Card>
-          <div className="text-center py-12 text-white/60">
-            <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-40" />
+          <div className="text-center py-12 text-gray-500">
+            <MessageCircle className="w-12 h-12 mx-auto mb-4 text-gray-300" />
             <p>No feedback yet for this solution</p>
           </div>
         </Card>
@@ -770,20 +818,20 @@ const Feedback = ({ debugQueryId }) => {
           {feedback.map((item) => (
             <Card key={item.id} className="p-4">
               <div className="flex items-start space-x-3">
-                <div className={`p-2 rounded-full ${item.helpful ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                <div className={`p-2 rounded-full ${item.helpful ? 'bg-green-100' : 'bg-red-100'}`}>
                   {item.helpful ? (
-                    <ThumbsUp className="w-4 h-4 text-green-400" />
+                    <ThumbsUp className="w-4 h-4 text-green-600" />
                   ) : (
-                    <ThumbsDown className="w-4 h-4 text-red-400" />
+                    <ThumbsDown className="w-4 h-4 text-red-600" />
                   )}
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center space-x-2 text-white/60 text-sm mb-2">
+                  <div className="flex items-center space-x-2 text-gray-500 text-sm mb-2">
                     <Calendar className="w-3 h-3" />
                     <span>{formatDate(item.created_at)}</span>
                   </div>
                   {item.comments && (
-                    <p className="text-white/80 text-sm">{item.comments}</p>
+                    <p className="text-gray-700 text-sm">{item.comments}</p>
                   )}
                 </div>
               </div>
@@ -804,20 +852,20 @@ import { Code2, Heart, Github, Twitter } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="glass-dark mt-12 border-t border-white/10">
+    <footer className="glass-dark mt-12 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-3">
-            <Code2 className="w-6 h-6 text-purple-400" />
-            <span className="text-white font-semibold">CodeTracker</span>
-            <span className="text-white/40">•</span>
-            <span className="text-white/60 text-sm">AI-Powered Debugging</span>
+            <Code2 className="w-6 h-6 text-purple-600" />
+            <span className="text-gray-900 font-semibold">CodeTracker</span>
+            <span className="text-gray-400">•</span>
+            <span className="text-gray-500 text-sm">AI-Powered Debugging</span>
           </div>
           
           <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-1 text-white/60 text-sm">
+            <div className="flex items-center space-x-1 text-gray-500 text-sm">
               <span>Made with</span>
-              <Heart className="w-4 h-4 text-red-400 fill-current" />
+              <Heart className="w-4 h-4 text-red-500 fill-current" />
               <span>for developers</span>
             </div>
             
@@ -826,7 +874,7 @@ const Footer = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/40 hover:text-white transition-colors"
+                className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <Github className="w-5 h-5" />
               </a>
@@ -834,7 +882,7 @@ const Footer = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/40 hover:text-white transition-colors"
+                className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <Twitter className="w-5 h-5" />
               </a>
@@ -842,8 +890,8 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-6 pt-6 border-t border-white/10 text-center">
-          <p className="text-white/40 text-sm">
+        <div className="mt-6 pt-6 border-t border-gray-200 text-center">
+          <p className="text-gray-400 text-sm">
             © 2024 CodeTracker. Built with React, FastAPI, and AI magic.
           </p>
         </div>
@@ -861,34 +909,34 @@ import { Bell, Search, User, Settings } from 'lucide-react'
 
 const Header = () => {
   return (
-    <header className="glass-dark sticky top-0 z-50 p-4 border-b border-white/10">
+    <header className="glass sticky top-0 z-50 p-4 border-b border-gray-200">
       <div className="flex items-center justify-between">
         <div className="flex-1 max-w-2xl">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search projects, commits, or errors..."
-              className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/20 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             />
           </div>
         </div>
         
         <div className="flex items-center space-x-4 ml-6">
-          <button className="relative p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+          <button className="relative p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl transition-all">
             <Bell className="w-5 h-5" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-xs font-bold flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-xs font-bold text-white flex items-center justify-center">
               3
             </span>
           </button>
           
-          <button className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+          <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl transition-all">
             <Settings className="w-5 h-5" />
           </button>
           
-          <button className="flex items-center space-x-2 p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full flex items-center justify-center">
-              <User className="w-4 h-4" />
+          <button className="flex items-center space-x-2 p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-all">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <User className="w-4 h-4 text-white" />
             </div>
             <span className="text-sm font-medium">Developer</span>
           </button>
@@ -922,15 +970,15 @@ const Sidebar = () => {
   ]
 
   return (
-    <aside className="glass-dark fixed top-0 left-0 h-full w-64 border-r border-white/10 hidden lg:block z-50">
-      <div className="p-6 border-b border-white/10">
+    <aside className="glass fixed top-0 left-0 h-full w-64 border-r border-gray-200 hidden lg:block z-50">
+      <div className="p-6 border-b border-gray-200">
         <div className="flex items-center space-x-3">
           <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
             <Code2 className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-white font-bold text-xl">CodeTracker</h1>
-            <p className="text-white/60 text-sm">AI-Powered Debugging</p>
+            <h1 className="text-gray-900 font-bold text-xl">CodeTracker</h1>
+            <p className="text-gray-500 text-sm">AI-Powered Debugging</p>
           </div>
         </div>
       </div>
@@ -943,8 +991,8 @@ const Sidebar = () => {
             className={({ isActive }) =>
               `flex items-center space-x-3 p-3 rounded-xl transition-all ${
                 isActive
-                  ? 'bg-white/10 text-white shadow-lg'
-                  : 'text-white/60 hover:text-white hover:bg-white/5'
+                  ? 'bg-blue-50 text-blue-600 border border-blue-100 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`
             }
           >
@@ -955,12 +1003,12 @@ const Sidebar = () => {
       </nav>
       
       <div className="absolute bottom-6 left-6 right-6">
-        <div className="glass p-4 rounded-xl">
+        <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
           <div className="flex items-center space-x-2 mb-2">
-            <Sparkles className="w-4 h-4 text-yellow-400" />
-            <span className="text-white text-sm font-medium">Pro Tip</span>
+            <Sparkles className="w-4 h-4 text-yellow-500" />
+            <span className="text-blue-700 text-sm font-medium">Pro Tip</span>
           </div>
-          <p className="text-white/70 text-xs">
+          <p className="text-blue-600 text-xs">
             Use the debugger to find solutions from your project's history
           </p>
         </div>
@@ -1016,7 +1064,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
     >
       <form onSubmit={handleSubmit} className="p-6 space-y-4">
         <div>
-          <label className="block text-white/80 text-sm font-medium mb-2">
+          <label className="block text-gray-700 text-sm font-medium mb-2">
             Project Name *
           </label>
           <input
@@ -1025,12 +1073,12 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder="e.g., My Awesome Project"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
         <div>
-          <label className="block text-white/80 text-sm font-medium mb-2">
+          <label className="block text-gray-700 text-sm font-medium mb-2">
             Git Repository URL *
           </label>
           <input
@@ -1039,12 +1087,12 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             value={formData.git_url}
             onChange={(e) => handleInputChange('git_url', e.target.value)}
             placeholder="https://github.com/username/repository.git"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 font-mono text-sm"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
           />
         </div>
 
         <div>
-          <label className="block text-white/80 text-sm font-medium mb-2">
+          <label className="block text-gray-700 text-sm font-medium mb-2">
             Description
           </label>
           <textarea
@@ -1052,7 +1100,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             onChange={(e) => handleInputChange('description', e.target.value)}
             placeholder="Brief description of the project..."
             rows={3}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 resize-none"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
           />
         </div>
 
@@ -1068,6 +1116,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
           <Button
             type="submit"
             loading={loading}
+            className="btn-primary"
           >
             Add Project
           </Button>
@@ -1115,40 +1164,40 @@ const ProjectCard = ({ project, onRefresh }) => {
     <Card hover className="h-full">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-blue-500/20 rounded-lg">
-            <GitBranch className="w-5 h-5 text-blue-400" />
+          <div className="p-2 bg-blue-100 rounded-lg">
+            <GitBranch className="w-5 h-5 text-blue-600" />
           </div>
-          <h3 className="text-white font-semibold text-lg">{project.name}</h3>
+          <h3 className="text-gray-900 font-semibold text-lg">{project.name}</h3>
         </div>
         <Button
           variant="ghost"
           size="sm"
           loading={refreshing}
           onClick={handleRefresh}
-          className="p-2"
+          className="p-2 text-gray-500 hover:text-gray-700"
         >
           <RefreshCw className="w-4 h-4" />
         </Button>
       </div>
 
       {project.description && (
-        <p className="text-white/70 text-sm mb-4 line-clamp-2">
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
           {project.description}
         </p>
       )}
 
       <div className="space-y-2 mb-4">
-        <div className="flex items-center space-x-2 text-white/60 text-sm">
+        <div className="flex items-center space-x-2 text-gray-500 text-sm">
           <FileText className="w-4 h-4" />
           <span className="truncate">{project.git_url}</span>
         </div>
-        <div className="flex items-center space-x-2 text-white/60 text-sm">
+        <div className="flex items-center space-x-2 text-gray-500 text-sm">
           <Calendar className="w-4 h-4" />
           <span>Created {formatDate(project.created_at)}</span>
         </div>
       </div>
 
-      <div className="flex items-center space-x-3 pt-4 border-t border-white/10">
+      <div className="flex items-center space-x-3 pt-4 border-t border-gray-200">
         <Button
           variant="secondary"
           size="sm"
@@ -1161,6 +1210,7 @@ const ProjectCard = ({ project, onRefresh }) => {
           variant="ghost"
           size="sm"
           onClick={() => window.open(project.git_url, '_blank')}
+          className="text-gray-500 hover:text-gray-700"
         >
           <ExternalLink className="w-4 h-4" />
         </Button>
@@ -1207,12 +1257,12 @@ const ProjectList = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">Your Projects</h2>
-          <p className="text-white/60">Manage and track your code repositories</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Projects</h2>
+          <p className="text-gray-600">Manage and track your code repositories</p>
         </div>
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-2 btn-primary"
         >
           <Plus className="w-4 h-4" />
           <span>Add Project</span>
@@ -1222,15 +1272,15 @@ const ProjectList = () => {
       {loading ? (
         <Card>
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
           </div>
         </Card>
       ) : projects.length === 0 ? (
         <Card className="text-center py-12">
-          <GitBranch className="w-12 h-12 text-white/40 mx-auto mb-4" />
-          <h3 className="text-white text-lg font-medium mb-2">No projects yet</h3>
-          <p className="text-white/60 mb-4">Add your first project to start tracking code evolution</p>
-          <Button onClick={() => setIsModalOpen(true)}>
+          <GitBranch className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+          <h3 className="text-gray-700 text-lg font-medium mb-2">No projects yet</h3>
+          <p className="text-gray-500 mb-4">Add your first project to start tracking code evolution</p>
+          <Button onClick={() => setIsModalOpen(true)} className="btn-primary">
             Add Your First Project
           </Button>
         </Card>
@@ -1270,12 +1320,12 @@ const Button = ({
   loading = false,
   ...props 
 }) => {
-  const baseClasses = 'rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed'
+  const baseClasses = 'rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed'
   
   const variants = {
-    primary: 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 focus:ring-blue-500 shadow-lg hover:shadow-xl',
-    secondary: 'bg-white/10 text-white border border-white/20 hover:bg-white/20 focus:ring-white/30',
-    ghost: 'text-white/80 hover:text-white hover:bg-white/10 focus:ring-white/20',
+    primary: 'btn-primary',
+    secondary: 'btn-secondary',
+    ghost: 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:ring-gray-200',
   }
   
   const sizes = {
@@ -1373,7 +1423,7 @@ const Modal = ({ isOpen, onClose, title, children, size = 'md' }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/20 backdrop-blur-sm"
             onClick={onClose}
           />
           
@@ -1386,11 +1436,11 @@ const Modal = ({ isOpen, onClose, title, children, size = 'md' }) => {
             className={`relative glass rounded-2xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden`}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <h2 className="text-xl font-semibold text-white">{title}</h2>
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
               <button
                 onClick={onClose}
-                className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-xl transition-all"
+                className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl transition-all"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1535,8 +1585,8 @@ const Dashboard = () => {
       <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${color} mb-4`}>
         <Icon className="w-6 h-6 text-white" />
       </div>
-      <div className="text-2xl font-bold text-white mb-1">{value}</div>
-      <div className="text-white/60 text-sm">{label}</div>
+      <div className="text-2xl font-bold text-gray-900 mb-1">{value}</div>
+      <div className="text-gray-500 text-sm">{label}</div>
     </Card>
   )
 
@@ -1544,10 +1594,10 @@ const Dashboard = () => {
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-white mb-4">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Welcome to <span className="gradient-text">CodeTracker</span>
         </h1>
-        <p className="text-white/70 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
           AI-powered code evolution tracking and debugging platform that learns from your project's history
         </p>
       </div>
@@ -1582,7 +1632,7 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <Card>
-        <h3 className="text-white text-xl font-semibold mb-6">Quick Actions</h3>
+        <h3 className="text-gray-900 text-xl font-semibold mb-6">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Button
             variant="secondary"
@@ -1614,13 +1664,13 @@ const Dashboard = () => {
       {/* Recent Activity */}
       {projects.length > 0 && (
         <Card>
-          <h3 className="text-white text-xl font-semibold mb-6">Recent Projects</h3>
+          <h3 className="text-gray-900 text-xl font-semibold mb-6">Recent Projects</h3>
           <div className="space-y-4">
             {projects.slice(0, 3).map((project) => (
-              <div key={project.id} className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
+              <div key={project.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                 <div>
-                  <h4 className="text-white font-medium">{project.name}</h4>
-                  <p className="text-white/60 text-sm">{project.git_url}</p>
+                  <h4 className="text-gray-900 font-medium">{project.name}</h4>
+                  <p className="text-gray-500 text-sm">{project.git_url}</p>
                 </div>
                 <Button
                   variant="ghost"
@@ -1666,8 +1716,8 @@ const Debug = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Debug Assistant</h1>
-        <p className="text-white/60">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Debug Assistant</h1>
+        <p className="text-gray-600">
           AI-powered debugging using your project's historical data and patterns
         </p>
       </div>
@@ -1712,8 +1762,8 @@ const History = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">History</h1>
-        <p className="text-white/60">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">History</h1>
+        <p className="text-gray-600">
           Explore your project's commit history and user feedback
         </p>
       </div>
@@ -1722,14 +1772,14 @@ const History = () => {
       {projects.length > 0 && (
         <Card className="mb-6">
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-white/60">
+            <div className="flex items-center space-x-2 text-gray-600">
               <GitBranch className="w-4 h-4" />
               <span>Project:</span>
             </div>
             <select
               value={selectedProject || ''}
               onChange={(e) => setSelectedProject(Number(e.target.value))}
-              className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+              className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               {projects.map((project) => (
                 <option key={project.id} value={project.id}>
@@ -1742,13 +1792,13 @@ const History = () => {
       )}
 
       {/* Tabs */}
-      <div className="flex space-x-1 p-1 bg-white/10 rounded-xl mb-6">
+      <div className="flex space-x-1 p-1 bg-gray-100 rounded-xl mb-6">
         <button
           onClick={() => setActiveTab('commits')}
           className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all ${
             activeTab === 'commits'
-              ? 'bg-white/20 text-white'
-              : 'text-white/60 hover:text-white'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-gray-600 hover:text-gray-900'
           }`}
         >
           <Hammer className="w-4 h-4" />
@@ -1758,8 +1808,8 @@ const History = () => {
           onClick={() => setActiveTab('feedback')}
           className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all ${
             activeTab === 'feedback'
-              ? 'bg-white/20 text-white'
-              : 'text-white/60 hover:text-white'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-gray-600 hover:text-gray-900'
           }`}
         >
           <MessageCircle className="w-4 h-4" />
@@ -1779,8 +1829,8 @@ const History = () => {
         </>
       ) : (
         <Card>
-          <div className="text-center py-12 text-white/60">
-            <GitBranch className="w-12 h-12 mx-auto mb-4 opacity-40" />
+          <div className="text-center py-12 text-gray-500">
+            <GitBranch className="w-12 h-12 mx-auto mb-4 text-gray-300" />
             <p>Select a project to view history</p>
           </div>
         </Card>
@@ -1801,8 +1851,8 @@ const Projects = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Projects</h1>
-        <p className="text-white/60">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Projects</h1>
+        <p className="text-gray-600">
           Manage your code repositories and track their evolution over time
         </p>
       </div>
@@ -1816,7 +1866,7 @@ export default Projects
 
 --- File: C:\Shashank\SaaS\code-rag-debugger\frontend\src\utils\api.js ---
 
-const API_BASE_URL = 'http://localhost:8000'
+const API_BASE_URL = 'http://localhost:8000/api/v1'
 
 const handleResponse = async (response) => {
   if (!response.ok) {
