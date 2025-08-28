@@ -46,7 +46,7 @@ const Dashboard = () => {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Welcome to <span className="gradient-text">CodeTracker</span>
+          Welcome to <span className="gradient-text">RodeCeviewr</span>
         </h1>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
           AI-powered code evolution tracking and debugging platform that learns from your project's history

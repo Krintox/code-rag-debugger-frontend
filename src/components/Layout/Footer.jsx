@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-3">
             <Code2 className="w-6 h-6 text-purple-600" />
-            <span className="text-gray-900 font-semibold">CodeTracker</span>
+            <span className="text-gray-900 font-semibold">RodeCeview</span>
             <span className="text-gray-400">•</span>
             <span className="text-gray-500 text-sm">AI-Powered Debugging</span>
           </div>
@@ -42,7 +42,7 @@ const Footer = () => {
         
         <div className="mt-6 pt-6 border-t border-gray-200 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 CodeTracker. Built with React, FastAPI, and AI magic.
+            © 2024 RodeCeviewr. Built with React, FastAPI, and AI magic.
           </p>
         </div>
       </div>
