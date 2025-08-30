@@ -60,7 +60,7 @@ const NotificationsPage = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 my-6">
       <div className="mb-8">
         <div className="flex items-center space-x-3 mb-2">
           <div className="p-2 bg-blue-100 rounded-lg">

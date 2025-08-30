@@ -19,7 +19,7 @@ const Debug = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto p-6 my-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Debug Assistant</h1>
         <p className="text-gray-600">
